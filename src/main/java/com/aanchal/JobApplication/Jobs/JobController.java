@@ -11,15 +11,20 @@ import java.util.List;
 @RestController
 public class JobController {
 
-    private List<Jobs> jobs=new ArrayList<>();
+    private JobService jobService;
+
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
+
     @GetMapping("/jobs")
     public List<Jobs> findAll(){
-        return jobs;
+        return jobService.findAll();
     }
 
     @PostMapping("/jobs")
     public String createJob(@RequestBody Jobs job){
-        jobs.add(job);
+        jobService.createJob(job);
         return "Job Added Successfully";
 
     }
