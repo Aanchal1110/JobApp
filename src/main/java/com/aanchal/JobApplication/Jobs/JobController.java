@@ -1,5 +1,7 @@
 package com.aanchal.JobApplication.Jobs;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,23 +17,23 @@ public class JobController {
     }
 
     @GetMapping("/jobs")
-    public List<Jobs> findAll(){
+    public ResponseEntity<List<Jobs>> findAll(){
 
-        return jobService.findAll();
+        return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/jobs")
-    public String createJob(@RequestBody Jobs job){
+    public ResponseEntity<String> createJob(@RequestBody Jobs job){
         jobService.createJob(job);
-        return "Job Added Successfully";
+        return new ResponseEntity<>("Job added successfully",HttpStatus.CREATED);
 
     }
     @GetMapping("/jobs/{id}")
-    public Jobs getJobbyId(@PathVariable Long id){
+    public ResponseEntity<Jobs> getJobbyId(@PathVariable Long id){
         Jobs job=jobService.getJobById(id);
         if(job!=null){
-            return job;
+            return new ResponseEntity<>(job,HttpStatus.OK) ;
         }
-        return new Jobs(101L, "test","test","test","test", "loc");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
