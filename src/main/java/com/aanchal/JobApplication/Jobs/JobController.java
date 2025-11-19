@@ -1,6 +1,7 @@
 package com.aanchal.JobApplication.Jobs;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,15 @@ public class JobController {
             return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
         }
         return new ResponseEntity<>("Deletion failed", HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Jobs job){
+        boolean updated=jobService.updateJob(id, job);
+        if(updated){
+            return new ResponseEntity<>("Updated Successfully", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Could not update", HttpStatus.NOT_FOUND);
+
     }
 }
