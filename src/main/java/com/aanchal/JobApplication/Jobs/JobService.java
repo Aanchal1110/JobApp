@@ -8,4 +8,6 @@ import java.util.List;
 public interface JobService {
     List<Jobs> findAll();
     void createJob(Jobs job);
+
+    Jobs getJobById(Long id);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class jobServiceImpl implements JobService {
 
     List<Jobs> jobs=new ArrayList<>();
-    Long jobid= 0L;
+    Long jobid= 1L;
     @Override
     public List<Jobs> findAll() {
         return jobs;
@@ -23,5 +23,14 @@ public class jobServiceImpl implements JobService {
         job.setId(jobid++);
 
         jobs.add(job);
+    }
+    public Jobs getJobById(Long id){
+        for(Jobs job:jobs){
+            if(job.getId().equals(id)){
+                return job;
+            }
+        }
+        return null;
+        //getting an error 2:40
     }
 }
