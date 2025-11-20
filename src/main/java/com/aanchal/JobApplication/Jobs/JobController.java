@@ -17,7 +17,7 @@ public class JobController {
         this.jobService = jobService;
     }
 
-//    @GetMapping("/jobs") ->without RequestMapping
+//    @GetMapping("/jobs") ->before RequestMapping at class level
 @GetMapping
     public ResponseEntity<
             List<Jobs>> findAll(){
@@ -32,7 +32,7 @@ public class JobController {
         return new ResponseEntity<>("Job added successfully",HttpStatus.CREATED);
 
     }
-//    @GetMapping("/jobs/{id}") ->before RequestMapping
+//    @GetMapping("/jobs/{id}") ->before RequestMapping at class level
 @GetMapping("/{id}")
     public ResponseEntity<Jobs> getJobbyId(@PathVariable Long id){
         Jobs job=jobService.getJobById(id);
@@ -41,7 +41,7 @@ public class JobController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-//    @DeleteMapping("/jobs/{id}")
+//    @DeleteMapping("/jobs/{id}") before RequestMapping at class level
 @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long id){
         boolean deleted=jobService.deleteJobById(id);
@@ -51,7 +51,8 @@ public class JobController {
         return new ResponseEntity<>("Deletion failed", HttpStatus.NOT_FOUND);
     }
 
-//    @PutMapping("/jobs/{id}") ->before RequestMapping
+//    @PutMapping("/jobs/{id}") ->before RequestMapping at class level
+//    @RequestMapping(value = "/jobs/{id}", method = RequestMethod.PUT) ->RequestMapping at method level
 @PutMapping("/{id}")
     public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Jobs updatedjob){
         boolean updated=jobService.updateJob(id, updatedjob);
