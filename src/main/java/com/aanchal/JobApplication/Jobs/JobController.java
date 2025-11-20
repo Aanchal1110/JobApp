@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@RequestMapping("/jobs") //requestMapping helps in setting the base url so that we have to writeit again and agian
 @RestController
 public class JobController {
 
@@ -17,19 +17,23 @@ public class JobController {
         this.jobService = jobService;
     }
 
-    @GetMapping("/jobs")
-    public ResponseEntity<List<Jobs>> findAll(){
+//    @GetMapping("/jobs") ->without RequestMapping
+@GetMapping
+    public ResponseEntity<
+            List<Jobs>> findAll(){
 
         return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/jobs")
+//    @PostMapping("/jobs")
+@PostMapping
     public ResponseEntity<String> createJob(@RequestBody Jobs job){
         jobService.createJob(job);
         return new ResponseEntity<>("Job added successfully",HttpStatus.CREATED);
 
     }
-    @GetMapping("/jobs/{id}")
+//    @GetMapping("/jobs/{id}") ->before RequestMapping
+@GetMapping("/{id}")
     public ResponseEntity<Jobs> getJobbyId(@PathVariable Long id){
         Jobs job=jobService.getJobById(id);
         if(job!=null){
@@ -37,7 +41,8 @@ public class JobController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("/jobs/{id}")
+//    @DeleteMapping("/jobs/{id}")
+@DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long id){
         boolean deleted=jobService.deleteJobById(id);
         if(deleted){
@@ -46,9 +51,10 @@ public class JobController {
         return new ResponseEntity<>("Deletion failed", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Jobs job){
-        boolean updated=jobService.updateJob(id, job);
+//    @PutMapping("/jobs/{id}") ->before RequestMapping
+@PutMapping("/{id}")
+    public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Jobs updatedjob){
+        boolean updated=jobService.updateJob(id, updatedjob);
         if(updated){
             return new ResponseEntity<>("Updated Successfully", HttpStatus.OK);
         }
