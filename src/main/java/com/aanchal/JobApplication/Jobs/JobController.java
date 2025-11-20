@@ -52,7 +52,8 @@ public class JobController {
     }
 
 //    @PutMapping("/jobs/{id}") ->before RequestMapping at class level
-//    @RequestMapping(value = "/jobs/{id}", method = RequestMethod.PUT) ->RequestMapping at method level
+//    @RequestMapping(value = "/jobs/{id}", method = RequestMethod.PUT) ->RequestMapping at method
+//    level
 @PutMapping("/{id}")
     public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Jobs updatedjob){
         boolean updated=jobService.updateJob(id, updatedjob);

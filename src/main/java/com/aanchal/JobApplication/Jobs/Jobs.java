@@ -1,11 +1,21 @@
 package com.aanchal.JobApplication.Jobs;
 
+import jakarta.persistence.*;
+
+@Entity
+//@Table(name = "job_table")
 public class Jobs {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
+
+    public Jobs() {
+    }
+
     private String location;
 
     public Jobs(Long id, String title, String description, String minSalary, String maxSalary, String location){
