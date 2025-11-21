@@ -18,6 +18,38 @@ public class Company {
 
    // private List<Review> reviews;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Jobs> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Jobs> jobs) {
+        this.jobs = jobs;
+    }
+
     public Company() {
     }
 
