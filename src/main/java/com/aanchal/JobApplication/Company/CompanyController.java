@@ -17,13 +17,20 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> getAllCompanies(){
-        return companyService.getAllCompanies();
+    public ResponseEntity<List<Company>> getAllCompanies(){
+        return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> UpdateJob(@PathVariable Long id, @RequestBody Company updateCompany ){
         companyService.updateCompany(id, updateCompany);
         return new ResponseEntity<>("Updated the job", HttpStatus.OK);
     }
+
+    @PostMapping()
+    public ResponseEntity<String> createCompany(@RequestBody Company company){
+        companyService.createCompany(company);
+        return new ResponseEntity<>("Company created successfully", HttpStatus.CREATED);
+    }
+
 }

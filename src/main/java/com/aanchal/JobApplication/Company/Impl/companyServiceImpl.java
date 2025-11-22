@@ -35,4 +35,8 @@ public class companyServiceImpl implements CompanyService {
         return false;
     }
 
+    public void createCompany(Company company){
+        companyRepository.save(company);
+    }
+
 }
