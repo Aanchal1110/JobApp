@@ -35,4 +35,9 @@ public class ReviewsController {
         }
         return new ResponseEntity<>("Review could not be created",HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<Reviews> getReviewById(@PathVariable Long companyId, @PathVariable Long reviewId){
+        return new ResponseEntity<>(reviewService.getReviewById(companyId, reviewId), HttpStatus.OK);
+    }
 }
